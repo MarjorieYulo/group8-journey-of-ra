@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey of Ra — Group 8</title>
+
+<style>
+:root{
+  --ink:#151515;
+  --cream:#f4ecdf;
+  --sand:#e5cfaa;
+  --gold:#c89b45;
+  --gold2:#e4c57b;
+  --night:#10151b;
+  --red:#7c342c;
+  --blue:#1b3541;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  background:rgba(16,21,27,.94);
+  color:white;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.brand{
+  font-size:11px;
+  letter-spacing:.15em;
+  font-weight:700;
+}
+.nav{
+  display:flex;
+  gap:18px;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.8;
+}
+.nav a:hover{color:var(--gold2)}
+
+.hero{
+  min-height:72vh;
+  padding:80px 22px 60px;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(200,155,69,.16),transparent 25%),
+    var(--night);
+  color:white;
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+.hero-inner{
+  width:min(820px,100%);
+}
+.sun{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  margin:0 auto 24px;
+  background:linear-gradient(145deg,var(--gold2),var(--gold));
+  box-shadow:0 0 0 14px rgba(200,155,69,.07),0 0 0 28px rgba(200,155,69,.04);
+}
+.kicker{
+  font-size:9px;
+  letter-spacing:.2em;
+  font-weight:700;
+  color:var(--gold2);
+  margin-bottom:14px;
+}
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(44px,8vw,78px);
+  line-height:.95;
+  margin:0;
+  font-weight:400;
+}
+.hero p{
+  max-width:570px;
+  margin:18px auto 24px;
+  color:rgba(255,255,255,.68);
+  line-height:1.6;
+  font-size:14px;
+}
+.cta{
+  display:inline-block;
+  border:1px solid rgba(228,197,123,.55);
+  padding:12px 18px;
+  font-size:10px;
+  letter-spacing:.13em;
+  font-weight:700;
+}
+.cta:hover{background:var(--gold);color:#111}
+
+.section{
+  padding:72px 22px;
+}
+.wrap{
+  width:min(980px,100%);
+  margin:auto;
+}
+.section-title{
+  font-family:Georgia,serif;
+  font-size:clamp(36px,6vw,58px);
+  line-height:1;
+  margin:0 0 14px;
+  font-weight:400;
+}
+.section-copy{
+  max-width:650px;
+  color:#5d544b;
+  line-height:1.65;
+  margin:0;
+  font-size:14px;
+}
+
+/* JOURNEY INTERACTION */
+.journey{
+  background:#efe4d2;
+}
+.journey-grid{
+  margin-top:36px;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:28px;
+}
+.journey-tabs{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.stage-btn{
+  text-align:left;
+  border:1px solid rgba(0,0,0,.16);
+  background:transparent;
+  padding:15px 16px;
+  cursor:pointer;
+}
+.stage-btn small{
+  display:block;
+  font-size:8px;
+  letter-spacing:.14em;
+  color:#806028;
+  margin-bottom:4px;
+}
+.stage-btn strong{
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:400;
+}
+.stage-btn:hover,
+.stage-btn.active{
+  background:var(--ink);
+  color:white;
+}
+.stage-btn.active small{color:var(--gold2)}
+
+.stage-panel{
+  min-height:370px;
+  border:1px solid rgba(0,0,0,.16);
+  background:white;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.stage-visual{
+  position:relative;
+  min-height:370px;
+  overflow:hidden;
+}
+.sunset-bg{
+  background:linear-gradient(#e7c18d 0 50%,#a45a43 50% 100%);
+}
+.duat-bg{
+  background:
+    radial-gradient(circle at 25% 30%,rgba(27,53,65,.6),transparent 36%),
+    #10151b;
+}
+.chaos-bg{
+  background:linear-gradient(145deg,#1c1010,#4a1e1a);
+}
+.rebirth-bg{
+  background:linear-gradient(#c36a49 0 36%,#e8b770 60%,#f2dfbf);
+}
+.big-orb{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:linear-gradient(var(--gold2),var(--gold));
+  position:absolute;
+  left:50%;
+  top:47%;
+  transform:translate(-50%,-50%);
+}
+.boat{
+  position:absolute;
+  left:50%;
+  top:60%;
+  transform:translateX(-50%);
+  font-size:46px;
+  color:#141414;
+}
+.eye{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:rgba(228,197,123,.22);
+  font-size:150px;
+}
+.serpent{
+  position:absolute;
+  width:420px;
+  height:220px;
+  border:50px solid #7c342c;
+  border-color:#7c342c transparent transparent #7c342c;
+  border-radius:50%;
+  left:-115px;
+  top:80px;
+  transform:rotate(12deg);
+}
+.serpent::after{
+  content:"";
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--gold2);
+  position:absolute;
+  right:45px;
+  top:10px;
+}
+.stage-text{
+  padding:32px;
+  align-self:center;
+}
+.stage-text .small{
+  font-size:9px;
+  letter-spacing:.16em;
+  font-weight:700;
+  color:#82612a;
+}
+.stage-text h3{
+  font-family:Georgia,serif;
+  font-size:34px;
+  margin:8px 0 12px;
+  font-weight:400;
+}
+.stage-text p{
+  font-size:14px;
+  line-height:1.65;
+  color:#5e554c;
+}
+.meaning{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid rgba(0,0,0,.14);
+  font-size:12px!important;
+  color:#2e2924!important;
+}
+
+/* FINAL ART */
+.artwork{
+  background:#11161c;
+  color:white;
+}
+.artwork .section-copy{color:rgba(255,255,255,.58)}
+.art-frame{
+  margin-top:34px;
+  border:1px solid rgba(228,197,123,.32);
+  padding:14px;
+  background:#080b0f;
+}
+.placeholder{
+  aspect-ratio:16/9;
+  position:relative;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),
+    #0e141b;
+  background-size:34px 34px;
+}
+.p-sun{
+  position:absolute;
+  width:30%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:linear-gradient(var(--gold2),var(--gold));
+  right:-5%;
+  top:-18%;
+}
+.p-serpent{
+  position:absolute;
+  width:50%;
+  height:50%;
+  border:40px solid rgba(124,52,44,.75);
+  border-color:rgba(124,52,44,.75) transparent transparent rgba(124,52,44,.75);
+  border-radius:50%;
+  left:-22%;
+  bottom:-26%;
+  transform:rotate(12deg);
+}
+.p-boat{
+  position:absolute;
+  left:43%;
+  top:46%;
+  font-size:44px;
+  color:var(--gold2);
+}
+.placeholder-copy{
+  position:relative;
+  z-index:3;
+  width:min(520px,80%);
+}
+.placeholder-copy small{
+  font-size:8px;
+  letter-spacing:.18em;
+  color:var(--gold2);
+}
+.placeholder-copy h3{
+  font-family:Georgia,serif;
+  font-size:clamp(30px,5vw,48px);
+  margin:8px 0;
+  font-weight:400;
+}
+.placeholder-copy p{
+  font-size:12px;
+  color:rgba(255,255,255,.55);
+  line-height:1.6;
+}
+.art-note-box{
+  margin-top:22px;
+  background:#efe4d2;
+  color:#1c1916;
+  padding:20px;
+  display:grid;
+  grid-template-columns:.65fr 1.35fr;
+  gap:22px;
+}
+.art-note-box h4{
+  font-family:Georgia,serif;
+  font-size:22px;
+  margin:0;
+  font-weight:400;
+}
+.art-note-box p{
+  margin:0;
+  font-size:13px;
+  color:#62594f;
+  line-height:1.65;
+}
+
+/* APPRECIATION */
+.appreciation{
+  background:#f5eee3;
+}
+.points{
+  margin-top:34px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(0,0,0,.15);
+  border-left:1px solid rgba(0,0,0,.15);
+}
+.point{
+  min-height:210px;
+  padding:22px;
+  border-right:1px solid rgba(0,0,0,.15);
+  border-bottom:1px solid rgba(0,0,0,.15);
+}
+.point span{
+  font-size:9px;
+  letter-spacing:.15em;
+  font-weight:700;
+  color:#806028;
+}
+.point h3{
+  font-family:Georgia,serif;
+  font-size:24px;
+  margin:10px 0;
+  font-weight:400;
+}
+.point p{
+  font-size:12px;
+  line-height:1.6;
+  color:#62594f;
+}
+
+/* CLASS INTERACTION */
+.interact{
+  background:linear-gradient(135deg,#d7ad73,#efe2cd);
+}
+.interact-card{
+  text-align:center;
+}
+.interact-card p{
+  max-width:620px;
+  margin:0 auto;
+  color:#544b43;
+  line-height:1.65;
+  font-size:14px;
+}
+.question-box{
+  margin:32px auto 20px;
+  max-width:700px;
+  display:grid;
+  grid-template-columns:44px 1fr 44px;
+  gap:10px;
+  align-items:center;
+}
+.qbtn{
+  height:44px;
+  border:1px solid rgba(0,0,0,.25);
+  background:transparent;
+  cursor:pointer;
+}
+.qbtn:hover{background:#171513;color:white}
+.question{
+  min-height:92px;
+  padding:18px;
+  border:1px solid rgba(0,0,0,.22);
+  display:grid;
+  place-items:center;
+  font-family:Georgia,serif;
+  font-size:22px;
+  background:rgba(255,255,255,.18);
+}
+footer{
+  background:#0b0e12;
+  color:rgba(255,255,255,.55);
+  padding:22px;
+  text-align:center;
+  font-size:9px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+/* REVEAL */
+.fade{
+  opacity:0;
+  transform:translateY(18px);
+  transition:.6s ease;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+}
+
+@media(max-width:850px){
+  .nav{display:none}
+  .journey-grid{grid-template-columns:1fr}
+  .journey-tabs{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stage-btn{padding:12px}
+  .stage-btn strong{font-size:16px}
+  .stage-panel{grid-template-columns:1fr}
+  .points{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .topbar{padding:0 16px}
+  .hero{min-height:68vh}
+  .section{padding:58px 16px}
+  .journey-tabs{grid-template-columns:1fr 1fr}
+  .stage-visual{min-height:260px}
+  .stage-panel{min-height:unset}
+  .points{grid-template-columns:1fr}
+  .art-note-box{grid-template-columns:1fr}
+  .question{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+  .fade{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <a class="brand" href="#home">☀ JOURNEY OF RA</a>
+  <div class="nav">
+    <a href="#journey">Journey</a>
+    <a href="#artwork">Artwork</a>
+    <a href="#appreciation">Meaning</a>
+    <a href="#class">Class</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="sun"></div>
+    <div class="kicker">GROUP 8 · ART APPRECIATION</div>
+    <h1>The Journey of Ra</h1>
+    <p>
+      We wanted to keep the Egyptian story, but present it in a cleaner and more modern way.
+      Instead of making a super detailed artwork, the website lets the story unfold as you explore it.
+    </p>
+    <a class="cta" href="#journey">START ↓</a>
+  </div>
+</section>
+
+<section class="section journey" id="journey">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker" style="color:#806028">THE JOURNEY</div>
+      <h2 class="section-title">Four moments. One cycle.</h2>
+      <p class="section-copy">
+        Draft muna: we’ll research each part of Ra’s journey, then replace the reminders below with our own short explanation.
+      </p>
+    </div>
+
+    <div class="journey-grid fade">
+      <div class="journey-tabs">
+        <button class="stage-btn active" data-stage="sunset">
+          <small>01</small><strong>Sunset</strong>
+        </button>
+        <button class="stage-btn" data-stage="duat">
+          <small>02</small><strong>Duat</strong>
+        </button>
+        <button class="stage-btn" data-stage="chaos">
+          <small>03</small><strong>Apophis</strong>
+        </button>
+        <button class="stage-btn" data-stage="rebirth">
+          <small>04</small><strong>Rebirth</strong>
+        </button>
+      </div>
+
+      <div class="stage-panel">
+        <div class="stage-visual sunset-bg" id="stageVisual">
+          <div class="big-orb" id="orb"></div>
+          <div class="boat" id="boat">𓊝</div>
+          <div class="eye" id="eye" style="display:none">𓂀</div>
+          <div class="serpent" id="serpent" style="display:none"></div>
+        </div>
+
+        <div class="stage-text">
+          <div class="small" id="stageSmall">SUNSET</div>
+          <h3 id="stageTitle">Add our research here.</h3>
+          <p id="stageDesc">
+            Reminder: research what happens when Ra begins his journey at sunset. Keep the final explanation short and in our own words.
+          </p>
+          <p class="meaning" id="stageMeaning">
+            <b>Art reminder:</b> Explain what visual element we used here and why.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section artwork" id="artwork">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker">FINAL MAJOR ARTWORK</div>
+      <h2 class="section-title">Our Final Artwork</h2>
+      <p class="section-copy">
+        We’ll place our final major artwork here once we finish it.
+      </p>
+    </div>
+
+    <div class="art-frame fade">
+      <!--
+        LATER:
+        Replace ONLY the div below with:
+        <img src="final-artwork.png" style="width:100%;display:block" alt="Journey of Ra artwork">
+      -->
+      <div class="placeholder">
+        <div class="p-sun"></div>
+        <div class="p-serpent"></div>
+        <div class="p-boat">𓊝</div>
+        <div class="placeholder-copy">
+          <small>YOUR FINAL PIECE</small>
+          <h3>Major Artwork Here</h3>
+          <p>
+            Final artwork placeholder — we’ll replace this once our group finishes the piece.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="art-note-box fade">
+      <h4>Our Reflection</h4>
+      <p>
+        We’ll add our final reflection here once the artwork is finished.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section appreciation" id="appreciation">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker" style="color:#806028">ART APPRECIATION</div>
+      <h2 class="section-title">Why we designed it this way.</h2>
+      <p class="section-copy">
+        Blah blah — we’ll write our final explanation here after we finish the artwork and research.
+      </p>
+    </div>
+
+    <div class="points">
+      <article class="point fade">
+        <span>COLOR</span>
+        <h3>To be researched</h3>
+        <p>Reminder: explain why we chose our final colors and what they represent in the artwork.</p>
+      </article>
+
+      <article class="point fade">
+        <span>SHAPE</span>
+        <h3>To be researched</h3>
+        <p>Reminder: explain the shapes we used and how they help show Ra, the sun, Apophis, or the journey.</p>
+      </article>
+
+      <article class="point fade">
+        <span>MOVEMENT</span>
+        <h3>To be researched</h3>
+        <p>Reminder: explain how the layout, scrolling, or placement guides the viewer through the artwork.</p>
+      </article>
+
+      <article class="point fade">
+        <span>SYMBOLISM</span>
+        <h3>To be researched</h3>
+        <p>Reminder: identify the symbols we actually use in the final artwork and explain what each one means.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section interact" id="class">
+  <div class="wrap interact-card fade">
+    <div class="kicker" style="color:#806028">FOR THE CLASS</div>
+    <h2 class="section-title">Let them interpret it first.</h2>
+    <p>
+      Before explaining the answer, ask one question and let the class react.
+      That makes the presentation more interactive without turning it into a game.
+    </p>
+
+    <div class="question-box">
+      <button class="qbtn" id="prevQ">←</button>
+      <div class="question" id="question">What do you think the gold circle represents?</div>
+      <button class="qbtn" id="nextQ">→</button>
+    </div>
+
+    <a class="cta" style="color:#111;border-color:rgba(0,0,0,.25)" href="#home">BACK TO START ↑</a>
+  </div>
+</section>
+
+<footer>
+  GROUP 8 · ART APPRECIATION · THE JOURNEY OF RA
+</footer>
+
+<script>
+const stages = {
+  sunset:{
+    cls:"sunset-bg",
+    small:"SUNSET",
+    title:"Add our research here.",
+    desc:"Reminder: research what happens when Ra starts his journey at sunset. Keep the final explanation short and in our own words.",
+    meaning:"<b>Art reminder:</b> Explain the colors, shapes, or symbols we actually use for this part.",
+    orb:true,boat:true,eye:false,serpent:false
+  },
+  duat:{
+    cls:"duat-bg",
+    small:"THE DUAT",
+    title:"Add our research here.",
+    desc:"Reminder: research what the Duat is and what happens to Ra while traveling through it. Do not make this too long.",
+    meaning:"<b>Art reminder:</b> Explain how we show the Duat visually in the final design.",
+    orb:false,boat:false,eye:true,serpent:false
+  },
+  chaos:{
+    cls:"chaos-bg",
+    small:"APOPHIS",
+    title:"Add our research here.",
+    desc:"Reminder: research who Apophis is, what he does during Ra’s journey, and why he is important to the story.",
+    meaning:"<b>Art reminder:</b> Explain how we represent chaos or danger through our chosen design.",
+    orb:false,boat:false,eye:false,serpent:true
+  },
+  rebirth:{
+    cls:"rebirth-bg",
+    small:"REBIRTH",
+    title:"Add our research here.",
+    desc:"Reminder: research what happens when Ra completes the journey and how this connects to sunrise or rebirth.",
+    meaning:"<b>Art reminder:</b> Explain how the final visual shows renewal, light, or the cycle starting again.",
+    orb:true,boat:false,eye:false,serpent:false
+  }
+};
+
+const visual = document.getElementById("stageVisual");
+const orb = document.getElementById("orb");
+const boat = document.getElementById("boat");
+const eye = document.getElementById("eye");
+const serpent = document.getElementById("serpent");
+const small = document.getElementById("stageSmall");
+const title = document.getElementById("stageTitle");
+const desc = document.getElementById("stageDesc");
+const meaning = document.getElementById("stageMeaning");
+
+document.querySelectorAll(".stage-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".stage-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const s = stages[btn.dataset.stage];
+    visual.className = "stage-visual " + s.cls;
+    small.textContent = s.small;
+    title.textContent = s.title;
+    desc.textContent = s.desc;
+    meaning.innerHTML = s.meaning;
+
+    orb.style.display = s.orb ? "block" : "none";
+    boat.style.display = s.boat ? "block" : "none";
+    eye.style.display = s.eye ? "grid" : "none";
+    serpent.style.display = s.serpent ? "block" : "none";
+  });
+});
+
+const questions = [
+  "What do you think the gold circle represents?",
+  "What feeling do you get when the colors become darker?",
+  "Why do you think we used a curved shape for Apophis?",
+  "Which part of the design catches your attention first?",
+  "What do you think the return of gold means at the end?"
+];
+let qi=0;
+const q=document.getElementById("question");
+
+document.getElementById("nextQ").onclick=()=>{
+  qi=(qi+1)%questions.length;
+  q.textContent=questions[qi];
+};
+document.getElementById("prevQ").onclick=()=>{
+  qi=(qi-1+questions.length)%questions.length;
+  q.textContent=questions[qi];
+};
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add("show");
+  });
+},{threshold:.12});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
