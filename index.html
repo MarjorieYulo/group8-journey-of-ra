@@ -273,6 +273,57 @@ button{font:inherit}
   font-size:12px!important;
   color:#2e2924!important;
 }
+.stage-fade-target{
+  transition:opacity .35s ease;
+}
+.stage-fade-out{
+  opacity:0;
+}
+
+/* progress bar here */
+.progress-track{
+  margin-top:14px;
+  height:3px;
+  width:100%;
+  background:rgba(0,0,0,.12);
+}
+.progress-fill{
+  height:100%;
+  width:25%;
+  background:var(--gold);
+  transition:width .4s ease;
+}
+
+
+/* RESEARCH REFERENCES */
+.references-box{
+  margin-top:34px;
+  padding:20px 22px;
+  border-top:1px solid rgba(0,0,0,.16);
+  border-bottom:1px solid rgba(0,0,0,.16);
+}
+.references-box h3{
+  font-family:Georgia,serif;
+  font-size:22px;
+  margin:0 0 12px;
+  font-weight:400;
+}
+.references-box ul{
+  margin:0;
+  padding-left:18px;
+  display:grid;
+  gap:8px;
+}
+.references-box li{
+  font-size:11px;
+  line-height:1.55;
+  color:#62594f;
+}
+.references-box a{
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.references-box a:hover{color:#806028}
 
 /* FINAL ART */
 .artwork{
@@ -285,6 +336,11 @@ button{font:inherit}
   border:1px solid rgba(228,197,123,.32);
   padding:14px;
   background:#080b0f;
+  animation:frameGlow 3.8s ease-in-out infinite;
+}
+@keyframes frameGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(228,197,123,0)}
+  50%{box-shadow:0 0 22px 1px rgba(228,197,123,.18)}
 }
 .placeholder{
   aspect-ratio:16/9;
@@ -385,6 +441,12 @@ button{font:inherit}
   padding:22px;
   border-right:1px solid rgba(0,0,0,.15);
   border-bottom:1px solid rgba(0,0,0,.15);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.point:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+  background:white;
 }
 .point span{
   font-size:9px;
@@ -419,7 +481,7 @@ button{font:inherit}
   font-size:14px;
 }
 .question-box{
-  margin:32px auto 20px;
+  margin:32px auto 6px;
   max-width:700px;
   display:grid;
   grid-template-columns:44px 1fr 44px;
@@ -431,6 +493,7 @@ button{font:inherit}
   border:1px solid rgba(0,0,0,.25);
   background:transparent;
   cursor:pointer;
+  transition:background .2s ease,color .2s ease;
 }
 .qbtn:hover{background:#171513;color:white}
 .question{
@@ -442,6 +505,13 @@ button{font:inherit}
   font-family:Georgia,serif;
   font-size:22px;
   background:rgba(255,255,255,.18);
+  transition:opacity .3s ease;
+}
+.qcount{
+  font-size:10px;
+  letter-spacing:.14em;
+  color:#6b5f4f;
+  margin-bottom:26px;
 }
 footer{
   background:#0b0e12;
@@ -462,6 +532,10 @@ footer{
 .fade.show{
   opacity:1;
   transform:none;
+}
+
+.nav a.active{
+  color:var(--gold2);
 }
 
 @media(max-width:850px){
@@ -485,7 +559,7 @@ footer{
   .question{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
-  *{scroll-behavior:auto!important;transition:none!important}
+  *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
   .fade{opacity:1;transform:none}
 }
 </style>
@@ -522,7 +596,7 @@ footer{
       <div class="kicker" style="color:#806028">THE JOURNEY</div>
       <h2 class="section-title">Four moments. One cycle.</h2>
       <p class="section-copy">
-        Draft muna: we’ll research each part of Ra’s journey, then replace the reminders below with our own short explanation.
+        Click each part to follow Ra’s journey from sunset, through the Duat, and back to sunrise.
       </p>
     </div>
 
@@ -540,27 +614,40 @@ footer{
         <button class="stage-btn" data-stage="rebirth">
           <small>04</small><strong>Rebirth</strong>
         </button>
+        <!-- added progress tracker thingy -->
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
       </div>
 
       <div class="stage-panel">
-        <div class="stage-visual sunset-bg" id="stageVisual">
+        <div class="stage-visual sunset-bg stage-fade-target" id="stageVisual">
           <div class="big-orb" id="orb"></div>
           <div class="boat" id="boat">𓊝</div>
           <div class="eye" id="eye" style="display:none">𓂀</div>
           <div class="serpent" id="serpent" style="display:none"></div>
         </div>
 
-        <div class="stage-text">
+        <div class="stage-text stage-fade-target" id="stageTextWrap">
           <div class="small" id="stageSmall">SUNSET</div>
-          <h3 id="stageTitle">Add our research here.</h3>
+          <h3 id="stageTitle">The journey begins.</h3>
           <p id="stageDesc">
-            Reminder: research what happens when Ra begins his journey at sunset. Keep the final explanation short and in our own words.
+            When the sun sets in the west, Ra begins his nighttime journey. He leaves the sky and enters the Duat, the Egyptian underworld. The sunset represents the end of the day and the beginning of Ra’s journey through darkness.
           </p>
           <p class="meaning" id="stageMeaning">
-            <b>Art reminder:</b> Explain what visual element we used here and why.
+            <b>Key idea:</b> Sunset marks the start of Ra’s journey through the night.
           </p>
         </div>
       </div>
+    </div>
+
+    <div class="references-box fade">
+      <h3>References</h3>
+      <ul>
+        <li>The Metropolitan Museum of Art. (n.d.). <em>“Amduat” papyrus of Henettawy, daughter of Isetemkheb.</em> <a href="https://www.metmuseum.org/art/collection/search/551100" target="_blank" rel="noopener">The Metropolitan Museum of Art</a></li>
+        <li>The Metropolitan Museum of Art. (n.d.). <em>“Amduat” papyrus of Djedmutesankh.</em> <a href="https://www.metmuseum.org/art/collection/search/550898" target="_blank" rel="noopener">The Metropolitan Museum of Art</a></li>
+        <li>British Museum. (n.d.). <em>Apophis.</em> <a href="https://www.britishmuseum.org/collection/term/BIOG52861" target="_blank" rel="noopener">British Museum</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -656,6 +743,7 @@ footer{
       <div class="question" id="question">What do you think the gold circle represents?</div>
       <button class="qbtn" id="nextQ">→</button>
     </div>
+    <div class="qcount" id="qCount">1 / 5</div>
 
     <a class="cta" style="color:#111;border-color:rgba(0,0,0,.25)" href="#home">BACK TO START ↑</a>
   </div>
@@ -670,38 +758,40 @@ const stages = {
   sunset:{
     cls:"sunset-bg",
     small:"SUNSET",
-    title:"Add our research here.",
-    desc:"Reminder: research what happens when Ra starts his journey at sunset. Keep the final explanation short and in our own words.",
-    meaning:"<b>Art reminder:</b> Explain the colors, shapes, or symbols we actually use for this part.",
+    title:"The journey begins.",
+    desc:"When the sun sets in the west, Ra begins his nighttime journey. He leaves the sky and enters the Duat, the Egyptian underworld. The sunset represents the end of the day and the beginning of Ra’s journey through darkness.",
+    meaning:"<b>Key idea:</b> Sunset marks the start of Ra’s journey through the night.",
     orb:true,boat:true,eye:false,serpent:false
   },
   duat:{
     cls:"duat-bg",
     small:"THE DUAT",
-    title:"Add our research here.",
-    desc:"Reminder: research what the Duat is and what happens to Ra while traveling through it. Do not make this too long.",
-    meaning:"<b>Art reminder:</b> Explain how we show the Duat visually in the final design.",
+    title:"Ra travels through the underworld.",
+    desc:"The Duat is the underworld in ancient Egyptian mythology. During the night, Ra travels through it in his solar boat. His journey is connected to the cycle of the sun and the renewal of life.",
+    meaning:"<b>Key idea:</b> The Duat is the nighttime path Ra travels before the sun can rise again.",
     orb:false,boat:false,eye:true,serpent:false
   },
   chaos:{
     cls:"chaos-bg",
     small:"APOPHIS",
-    title:"Add our research here.",
-    desc:"Reminder: research who Apophis is, what he does during Ra’s journey, and why he is important to the story.",
-    meaning:"<b>Art reminder:</b> Explain how we represent chaos or danger through our chosen design.",
+    title:"Ra faces chaos.",
+    desc:"During his journey, Ra faces Apophis (Apep), a giant serpent associated with chaos and darkness. Apophis tries to stop Ra's solar boat from continuing its journey. Ra and his allies overcome the serpent so that the sun can continue toward sunrise.",
+    meaning:"<b>Key idea:</b> Apophis represents chaos trying to stop Ra and prevent sunrise.",
     orb:false,boat:false,eye:false,serpent:true
   },
   rebirth:{
     cls:"rebirth-bg",
     small:"REBIRTH",
-    title:"Add our research here.",
-    desc:"Reminder: research what happens when Ra completes the journey and how this connects to sunrise or rebirth.",
-    meaning:"<b>Art reminder:</b> Explain how the final visual shows renewal, light, or the cycle starting again.",
+    title:"The sun returns.",
+    desc:"After completing his journey through the Duat, Ra reaches the eastern horizon and is reborn at sunrise. The rising sun represents renewal, showing that the cycle of day and night begins again.",
+    meaning:"<b>Key idea:</b> Sunrise represents renewal and the start of another cycle.",
     orb:true,boat:false,eye:false,serpent:false
   }
 };
+const stageOrder = ["sunset","duat","chaos","rebirth"];
 
 const visual = document.getElementById("stageVisual");
+const textWrap = document.getElementById("stageTextWrap");
 const orb = document.getElementById("orb");
 const boat = document.getElementById("boat");
 const eye = document.getElementById("eye");
@@ -710,14 +800,19 @@ const small = document.getElementById("stageSmall");
 const title = document.getElementById("stageTitle");
 const desc = document.getElementById("stageDesc");
 const meaning = document.getElementById("stageMeaning");
+const progressFill = document.getElementById("progressFill");
 
-document.querySelectorAll(".stage-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".stage-btn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
+function setStage(key){
+  const btn = document.querySelector(`.stage-btn[data-stage="${key}"]`);
+  document.querySelectorAll(".stage-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
 
-    const s = stages[btn.dataset.stage];
-    visual.className = "stage-visual " + s.cls;
+  visual.classList.add("stage-fade-out");
+  textWrap.classList.add("stage-fade-out");
+
+  setTimeout(()=>{
+    const s = stages[key];
+    visual.className = "stage-visual stage-fade-target " + s.cls;
     small.textContent = s.small;
     title.textContent = s.title;
     desc.textContent = s.desc;
@@ -727,7 +822,24 @@ document.querySelectorAll(".stage-btn").forEach(btn=>{
     boat.style.display = s.boat ? "block" : "none";
     eye.style.display = s.eye ? "grid" : "none";
     serpent.style.display = s.serpent ? "block" : "none";
-  });
+
+    visual.classList.remove("stage-fade-out");
+    textWrap.classList.remove("stage-fade-out");
+  },220);
+
+  progressFill.style.width = ((stageOrder.indexOf(key)+1)/stageOrder.length*100)+"%";
+}
+
+document.querySelectorAll(".stage-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>setStage(btn.dataset.stage));
+});
+
+// allows u to use left and arrow keys
+document.addEventListener("keydown",(e)=>{
+  const current = document.querySelector(".stage-btn.active").dataset.stage;
+  const idx = stageOrder.indexOf(current);
+  if(e.key==="ArrowRight") setStage(stageOrder[(idx+1)%stageOrder.length]);
+  if(e.key==="ArrowLeft") setStage(stageOrder[(idx-1+stageOrder.length)%stageOrder.length]);
 });
 
 const questions = [
@@ -739,14 +851,24 @@ const questions = [
 ];
 let qi=0;
 const q=document.getElementById("question");
+const qCount=document.getElementById("qCount");
+
+function showQuestion(){
+  q.style.opacity=0;
+  setTimeout(()=>{
+    q.textContent=questions[qi];
+    qCount.textContent=(qi+1)+" / "+questions.length;
+    q.style.opacity=1;
+  },200);
+}
 
 document.getElementById("nextQ").onclick=()=>{
   qi=(qi+1)%questions.length;
-  q.textContent=questions[qi];
+  showQuestion();
 };
 document.getElementById("prevQ").onclick=()=>{
   qi=(qi-1+questions.length)%questions.length;
-  q.textContent=questions[qi];
+  showQuestion();
 };
 
 const observer=new IntersectionObserver(entries=>{
@@ -756,6 +878,22 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:.12});
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+const navLinks = document.querySelectorAll(".nav a");
+const sections = [...navLinks].map(link=>document.querySelector(link.getAttribute("href")));
+
+const spyObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = "#"+entry.target.id;
+      navLinks.forEach(link=>{
+        link.classList.toggle("active", link.getAttribute("href")===id);
+      });
+    }
+  });
+},{rootMargin:"-40% 0px -50% 0px"});
+
+sections.forEach(sec=>{ if(sec) spyObserver.observe(sec); });
 </script>
 
 </body>
