@@ -416,22 +416,28 @@ button{font:inherit}
   margin-top:22px;
   background:#efe4d2;
   color:#1c1916;
-  padding:20px;
+  padding:28px 30px 30px;
   display:grid;
-  grid-template-columns:.65fr 1.35fr;
-  gap:22px;
+  grid-template-columns:1fr 1fr;
+  column-gap:38px;
+  row-gap:20px;
+  align-items:start;
 }
 .art-note-box h4{
+  grid-column:1 / -1;
   font-family:Georgia,serif;
-  font-size:22px;
+  font-size:25px;
   margin:0;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(28,25,22,.16);
   font-weight:400;
 }
 .art-note-box p{
   margin:0;
   font-size:13px;
   color:#62594f;
-  line-height:1.65;
+  line-height:1.75;
+  text-align:left;
 }
 
 /* APPRECIATION */
@@ -564,7 +570,7 @@ footer{
   .stage-visual{min-height:260px}
   .stage-panel{min-height:unset}
   .points{grid-template-columns:1fr}
-  .art-note-box{grid-template-columns:1fr}
+  .art-note-box{grid-template-columns:1fr;column-gap:0;row-gap:16px;padding:24px 20px}
   .question{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
