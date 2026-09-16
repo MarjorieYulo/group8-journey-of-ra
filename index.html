@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Journey of Ra — Group 8</title>
+<title>ARTAPRI Portfolio — Group 8</title>
 
 <style>
 :root{
@@ -553,7 +553,196 @@ footer{
   color:var(--gold2);
 }
 
+
+/* =========================
+   ARTAPRI PORTFOLIO
+   ========================= */
+.portfolio-topbar{
+  gap:24px;
+}
+.portfolio-brand{
+  border:0;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  padding:0;
+}
+.activity-tabs{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.activity-tab{
+  border:1px solid rgba(255,255,255,.14);
+  background:transparent;
+  color:rgba(255,255,255,.62);
+  padding:10px 15px;
+  font-size:10px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.activity-tab:hover{
+  color:white;
+  border-color:rgba(228,197,123,.5);
+}
+.activity-tab.active{
+  background:var(--gold);
+  color:#151515;
+  border-color:var(--gold);
+}
+.activity-page{
+  display:none;
+}
+.activity-page.active{
+  display:block;
+}
+
+/* Scavenger Hunt */
+.scavenger-hero{
+  min-height:62vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:100px 22px 65px;
+  background:
+    radial-gradient(circle at 50% 36%,rgba(200,155,69,.16),transparent 24%),
+    linear-gradient(135deg,#f1e6d3,#dfc79f);
+  color:var(--ink);
+}
+.scavenger-hero-inner{
+  width:min(760px,100%);
+}
+.activity-number{
+  font-size:9px;
+  letter-spacing:.2em;
+  font-weight:700;
+  color:#806028;
+  margin-bottom:20px;
+}
+.scavenger-icon{
+  width:92px;
+  height:92px;
+  margin:0 auto 24px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-family:Georgia,serif;
+  font-size:48px;
+  color:#806028;
+  border:1px solid rgba(128,96,40,.32);
+  background:rgba(255,255,255,.24);
+}
+.scavenger-hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(48px,7vw,76px);
+  font-weight:400;
+  line-height:.95;
+  margin:0;
+}
+.scavenger-hero p{
+  max-width:650px;
+  margin:18px auto 0;
+  color:#62594f;
+  line-height:1.7;
+  font-size:14px;
+}
+.scavenger-content{
+  background:#f5eee3;
+}
+.scavenger-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.scavenger-card{
+  background:#efe4d2;
+  border:1px solid rgba(0,0,0,.13);
+  padding:25px;
+  min-height:230px;
+}
+.scavenger-card-wide{
+  grid-column:1 / -1;
+}
+.scavenger-card > span{
+  font-size:9px;
+  letter-spacing:.16em;
+  color:#806028;
+  font-weight:700;
+}
+.scavenger-card h2,
+.scavenger-card h3{
+  font-family:Georgia,serif;
+  font-weight:400;
+  margin:10px 0 12px;
+}
+.scavenger-card h2{
+  font-size:36px;
+}
+.scavenger-card h3{
+  font-size:26px;
+}
+.scavenger-card p{
+  margin:0;
+  color:#62594f;
+  line-height:1.7;
+  font-size:13px;
+}
+.scavenger-media-placeholder{
+  min-height:320px;
+  margin-top:24px;
+  border:1px dashed rgba(0,0,0,.28);
+  background:rgba(255,255,255,.22);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  text-align:center;
+  padding:28px;
+  color:#62594f;
+}
+.placeholder-icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.2);
+  font-size:25px;
+  color:#806028;
+}
+.scavenger-media-placeholder strong{
+  font-family:Georgia,serif;
+  font-size:21px;
+  font-weight:400;
+  color:#2e2924;
+}
+.scavenger-media-placeholder small{
+  max-width:520px;
+  line-height:1.6;
+}
+.reflection-placeholder{
+  min-height:auto;
+}
+
+/* Keep the Journey artwork sharp and properly contained. */
+.final-art-image{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  background:#080b0f;
+}
+
 @media(max-width:850px){
+  .portfolio-topbar{height:auto;min-height:58px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+  .activity-tabs{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .activity-tab{width:100%;padding:9px 8px}
+  .scavenger-grid{grid-template-columns:1fr}
+  .scavenger-card-wide{grid-column:auto}
+
   .nav{display:none}
   .journey-grid{grid-template-columns:1fr}
   .journey-tabs{display:grid;grid-template-columns:repeat(4,1fr)}
@@ -582,16 +771,20 @@ footer{
 
 <body>
 
-<div class="topbar">
-  <a class="brand" href="#home">☀ JOURNEY OF RA</a>
-  <div class="nav">
-    <a href="#journey">Journey</a>
-    <a href="#artwork">Artwork</a>
-    <a href="#appreciation">Meaning</a>
-    <a href="#class">Class</a>
+<div class="topbar portfolio-topbar">
+  <button class="brand portfolio-brand" id="portfolioHome" type="button">✦ ARTAPRI PORTFOLIO</button>
+
+  <div class="activity-tabs" role="tablist" aria-label="ARTAPRI activities">
+    <button class="activity-tab active" type="button" role="tab" aria-selected="true" data-activity="ra">
+      Journey of Ra
+    </button>
+    <button class="activity-tab" type="button" role="tab" aria-selected="false" data-activity="scavenger">
+      Scavenger Hunt
+    </button>
   </div>
 </div>
 
+<main class="activity-page active" id="activity-ra" data-activity-page="ra">
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="sun"></div>
@@ -766,9 +959,71 @@ footer{
   </div>
 </section>
 
-<footer>
-  GROUP 8 · ART APPRECIATION · THE JOURNEY OF RA
-</footer>
+
+</main>
+
+<main class="activity-page" id="activity-scavenger" data-activity-page="scavenger">
+  <section class="scavenger-hero">
+    <div class="scavenger-hero-inner">
+      <div class="activity-number">ACTIVITY 02</div>
+      <div class="scavenger-icon" aria-hidden="true">⌕</div>
+      <div class="kicker" style="color:#806028">ART APPRECIATION · SCAVENGER HUNT</div>
+      <h1>Scavenger Hunt</h1>
+      <p>
+        This page will contain our Scavenger Hunt activity. For now, we left the important
+        parts as reminders so we can add our own output, research, and reflection after the activity.
+      </p>
+    </div>
+  </section>
+
+  <section class="section scavenger-content">
+    <div class="wrap">
+      <div class="scavenger-grid">
+
+        <article class="scavenger-card scavenger-card-wide">
+          <span>01 · ACTIVITY OUTPUT</span>
+          <h2>Our Scavenger Hunt</h2>
+          <div class="scavenger-media-placeholder">
+            <div class="placeholder-icon">＋</div>
+            <strong>Add our photos / final output here</strong>
+            <small>
+              Reminder: place the main photos, collage, screenshots, or submitted output from the activity here.
+            </small>
+          </div>
+        </article>
+
+        <article class="scavenger-card">
+          <span>02 · WHAT WE FOUND</span>
+          <h3>Findings</h3>
+          <p>
+            Reminder: briefly explain what we were asked to find, the objects/artworks we chose,
+            and why they matched the activity.
+          </p>
+        </article>
+
+        <article class="scavenger-card">
+          <span>03 · ART CONNECTION</span>
+          <h3>Art Appreciation</h3>
+          <p>
+            Reminder: connect what we found to the art concepts discussed in class.
+            Keep this short and use our own explanation.
+          </p>
+        </article>
+
+        <article class="scavenger-card scavenger-card-wide reflection-placeholder">
+          <span>04 · OUR REFLECTION</span>
+          <h3>Reflection</h3>
+          <p>
+            We’ll add our group reflection here after completing the Scavenger Hunt.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>GROUP 8 · ARTAPRI PORTFOLIO · DE LA SALLE–COLLEGE OF SAINT BENILDE</footer>
 
 <script>
 const stages = {
@@ -911,6 +1166,31 @@ const spyObserver = new IntersectionObserver(entries=>{
 },{rootMargin:"-40% 0px -50% 0px"});
 
 sections.forEach(sec=>{ if(sec) spyObserver.observe(sec); });
+
+// ARTAPRI portfolio activity tabs
+const activityTabs = document.querySelectorAll(".activity-tab");
+const activityPages = document.querySelectorAll(".activity-page");
+
+function showActivity(activity){
+  activityTabs.forEach(tab => {
+    const active = tab.dataset.activity === activity;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
+  });
+
+  activityPages.forEach(page => {
+    page.classList.toggle("active", page.dataset.activityPage === activity);
+  });
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+activityTabs.forEach(tab => {
+  tab.addEventListener("click", () => showActivity(tab.dataset.activity));
+});
+
+document.getElementById("portfolioHome").addEventListener("click", () => showActivity("ra"));
+
 </script>
 
 </body>
