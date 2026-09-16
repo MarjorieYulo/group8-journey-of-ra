@@ -766,6 +766,141 @@ footer{
   *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
   .fade{opacity:1;transform:none}
 }
+
+/* =========================
+   SCAVENGER HUNT — COMPLETED ACTIVITY
+   ========================= */
+.scavenger-intro{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:55px;
+  align-items:end;
+  margin-bottom:34px;
+}
+.scavenger-section-title{
+  font-family:Georgia,serif;
+  font-size:clamp(36px,5vw,52px);
+  line-height:1;
+  font-weight:400;
+  margin:0;
+}
+.scavenger-intro > p{
+  margin:0;
+  color:#62594f;
+  font-size:13px;
+  line-height:1.75;
+  max-width:590px;
+}
+.object-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.object-card{
+  border:1px solid rgba(0,0,0,.14);
+  background:#efe4d2;
+  overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.object-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+}
+.object-photo-slot{
+  aspect-ratio:4/3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  text-align:center;
+  padding:20px;
+  background:
+    linear-gradient(rgba(128,96,40,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(128,96,40,.06) 1px,transparent 1px),
+    #f7f0e4;
+  background-size:26px 26px;
+  color:#806028;
+  border-bottom:1px solid rgba(0,0,0,.12);
+}
+.object-photo-slot > span{
+  font-family:Georgia,serif;
+  font-size:34px;
+  opacity:.24;
+}
+.object-photo-slot strong{
+  font-size:10px;
+  letter-spacing:.18em;
+}
+.object-photo-slot small{
+  color:#776c61;
+  font-size:10px;
+}
+.object-label{
+  padding:15px 17px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.object-label span{
+  font-size:8px;
+  color:#806028;
+  letter-spacing:.12em;
+}
+.object-label h3{
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:400;
+}
+.scavenger-reflection{
+  margin-top:55px;
+  background:#e6d2af;
+  border:1px solid rgba(0,0,0,.14);
+  padding:34px 36px;
+  display:grid;
+  grid-template-columns:.65fr 1.35fr;
+  gap:50px;
+}
+.reflection-heading h2{
+  margin:0;
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(30px,4vw,43px);
+  line-height:1.05;
+}
+.reflection-body{
+  display:grid;
+  gap:16px;
+}
+.reflection-body p{
+  margin:0;
+  color:#5f554b;
+  font-size:13px;
+  line-height:1.78;
+}
+@media(max-width:850px){
+  .scavenger-intro{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .object-grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .scavenger-reflection{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+}
+@media(max-width:560px){
+  .object-grid{
+    grid-template-columns:1fr;
+  }
+  .scavenger-reflection{
+    padding:25px 20px;
+  }
+}
+
 </style>
 </head>
 
@@ -970,55 +1105,152 @@ footer{
       <div class="kicker" style="color:#806028">ART APPRECIATION · SCAVENGER HUNT</div>
       <h1>Scavenger Hunt</h1>
       <p>
-        This page will contain our Scavenger Hunt activity. For now, we left the important
-        parts as reminders so we can add our own output, research, and reflection after the activity.
+        For this activity, we looked around the library and its surrounding areas for
+        ordinary objects that showed different visual elements. Most of what we found
+        came from a place we already spend time in as students, which made us look at
+        the library a little differently.
       </p>
     </div>
   </section>
 
   <section class="section scavenger-content">
     <div class="wrap">
-      <div class="scavenger-grid">
 
-        <article class="scavenger-card scavenger-card-wide">
-          <span>01 · ACTIVITY OUTPUT</span>
-          <h2>Our Scavenger Hunt</h2>
-          <div class="scavenger-media-placeholder">
-            <div class="placeholder-icon">＋</div>
-            <strong>Add our photos / final output here</strong>
-            <small>
-              Reminder: place the main photos, collage, screenshots, or submitted output from the activity here.
-            </small>
+      <div class="scavenger-intro">
+        <div>
+          <div class="kicker" style="color:#806028">WHAT WE FOUND</div>
+          <h2 class="scavenger-section-title">Seven things we noticed.</h2>
+        </div>
+        <p>
+          We photographed these objects inside and around the library. They are simple
+          things we normally pass by, but the activity made us pay attention to their
+          texture, shape, pattern, material, and the way light changes how they look.
+        </p>
+      </div>
+
+      <div class="object-grid">
+
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>01</span>
+            <strong>TILES</strong>
+            <small>Add our tiles photo here</small>
+          </div>
+          <div class="object-label">
+            <span>01</span>
+            <h3>Tiles</h3>
           </div>
         </article>
 
-        <article class="scavenger-card">
-          <span>02 · WHAT WE FOUND</span>
-          <h3>Findings</h3>
-          <p>
-            Reminder: briefly explain what we were asked to find, the objects/artworks we chose,
-            and why they matched the activity.
-          </p>
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>02</span>
+            <strong>LEAF</strong>
+            <small>Add our leaf photo here</small>
+          </div>
+          <div class="object-label">
+            <span>02</span>
+            <h3>Leaf</h3>
+          </div>
         </article>
 
-        <article class="scavenger-card">
-          <span>03 · ART CONNECTION</span>
-          <h3>Art Appreciation</h3>
-          <p>
-            Reminder: connect what we found to the art concepts discussed in class.
-            Keep this short and use our own explanation.
-          </p>
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>03</span>
+            <strong>BOOK</strong>
+            <small>Add our book photo here</small>
+          </div>
+          <div class="object-label">
+            <span>03</span>
+            <h3>Book</h3>
+          </div>
         </article>
 
-        <article class="scavenger-card scavenger-card-wide reflection-placeholder">
-          <span>04 · OUR REFLECTION</span>
-          <h3>Reflection</h3>
-          <p>
-            We’ll add our group reflection here after completing the Scavenger Hunt.
-          </p>
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>04</span>
+            <strong>FABRIC</strong>
+            <small>Add our fabric photo here</small>
+          </div>
+          <div class="object-label">
+            <span>04</span>
+            <h3>Fabric</h3>
+          </div>
+        </article>
+
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>05</span>
+            <strong>SHADOW</strong>
+            <small>Add our shadow photo here</small>
+          </div>
+          <div class="object-label">
+            <span>05</span>
+            <h3>Shadow</h3>
+          </div>
+        </article>
+
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>06</span>
+            <strong>BOOK HOLDER</strong>
+            <small>Add our book holder photo here</small>
+          </div>
+          <div class="object-label">
+            <span>06</span>
+            <h3>Book Holder</h3>
+          </div>
+        </article>
+
+        <article class="object-card">
+          <div class="object-photo-slot">
+            <span>07</span>
+            <strong>SOCKETS</strong>
+            <small>Add our sockets photo here</small>
+          </div>
+          <div class="object-label">
+            <span>07</span>
+            <h3>Sockets</h3>
+          </div>
         </article>
 
       </div>
+
+      <div class="scavenger-reflection">
+        <div class="reflection-heading">
+          <div class="kicker" style="color:#806028">OUR REFLECTION</div>
+          <h2>The library beyond academics.</h2>
+        </div>
+
+        <div class="reflection-body">
+          <p>
+            Most of the objects that we found were inside and around the library, and
+            it became a reflection of how the library has served a purpose throughout
+            our student life. The library is still accessible and important to students,
+            but nowadays we often prefer to work in cafés or simply work at home. Because
+            of that, the library can sometimes become more of a background in our perspective,
+            even though it has always been there for us.
+          </p>
+
+          <p>
+            At the same time, we came to realize that the library is not only about
+            studying. It can also be a place where students rest, wait between classes,
+            relax, or even sleep for a while. Because of that, the library becomes more
+            than just a place to read and study. It becomes a space where students can
+            slow down and feel comfortable.
+          </p>
+
+          <p>
+            This activity also made us understand Art Appreciation in a more personal way.
+            We did not have to look for a painting or a sculpture to appreciate something
+            visually. The tiles, a leaf, a book, fabric, shadows, a book holder, and even
+            electrical sockets were enough to make us stop and look closer. For us, that
+            is part of appreciating art too—learning to notice the ordinary things and
+            spaces around us instead of only paying attention to what is obviously called art.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 </main>
